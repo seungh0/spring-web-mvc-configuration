@@ -2,6 +2,7 @@ package me.will.demobootwebmvc.domain;
 
 import lombok.Getter;
 
+
 @Getter
 public class Person {
 

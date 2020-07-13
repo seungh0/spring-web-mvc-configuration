@@ -1,5 +1,6 @@
 package me.will.demobootwebmvc.controller;
 
+import me.will.demobootwebmvc.domain.Man;
 import me.will.demobootwebmvc.domain.Person;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,11 @@ public class SampleController {
 	@GetMapping("/bye")
 	public String bye(@RequestParam("name") Person person) {
 		return "bye " + person.getName();
+	}
+
+	@GetMapping("/hello")
+	public String helloId(@RequestParam("id") Man man) {
+		return "hello " + man.getName();
 	}
 
 }
