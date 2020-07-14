@@ -35,4 +35,9 @@ public class SampleController {
 		return body;
 	}
 
+	@GetMapping("/jsonMessage")
+	public Man jsonMessage(@RequestBody Man man) { //원래는 Dto로 변환 해야함 ㅠ.
+		return man;
+	}
+
 }
