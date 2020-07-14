@@ -4,6 +4,7 @@ import me.will.demobootwebmvc.domain.Man;
 import me.will.demobootwebmvc.domain.Person;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,6 +28,11 @@ public class SampleController {
 	@GetMapping("/hello")
 	public String helloId(@RequestParam("id") Man man) {
 		return "hello " + man.getName();
+	}
+
+	@GetMapping("/message")
+	public String message(@RequestBody String body) {
+		return body;
 	}
 
 }
