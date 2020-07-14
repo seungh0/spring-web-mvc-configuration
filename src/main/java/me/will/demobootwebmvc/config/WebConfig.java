@@ -4,8 +4,12 @@ import me.will.demobootwebmvc.config.interceptor.AnotherInterceptor;
 import me.will.demobootwebmvc.config.interceptor.GreetingInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.http.CacheControl;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.concurrent.TimeUnit;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
@@ -19,6 +23,9 @@ public class WebConfig implements WebMvcConfigurer {
 		registry.addFormatter(new PersonFormatter());
 	}
 
+	/**
+	 * 인터셉터 등록
+	 */
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new GreetingInterceptor());
@@ -27,5 +34,16 @@ public class WebConfig implements WebMvcConfigurer {
 				.order(1); // 우선순위 커스텀하고 싶을때 (작을수록 높음)
 	}
 	// preHandle1 -> preHandle2 -> postHandle2 -> postHandle1 -> afterCompletion2 -> afterCompletion1
+
+
+	/**
+	 * 리소스 핸들러 등록
+	 */
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/mobile/**")
+				.addResourceLocations("classpath:/mobile/")
+				.setCacheControl(CacheControl.maxAge(10, TimeUnit.MINUTES)); // 캐싱 전략 (10분 동안 캐싱)
+	}
 
 }
